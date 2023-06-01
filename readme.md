@@ -53,13 +53,13 @@ Note: Schedule on the website has Route 103 listed in the URL [ltd.org/system-ma
 
 TODO:
 
-- Sort `stop_times_3.csv` to list all times
-- Find the pattern that differentiates weekdays/Saturdays/Sundays
-- Compare against [LTD Website](https://www.ltd.org/system-map/route_103/)
+- ✅ Sort `stop_times_3.csv` to list all times
+- ✅ Find the pattern that differentiates weekdays/Saturdays/Sundays
+- ✅ Compare against [LTD Website](https://www.ltd.org/system-map/route_103/)
 - Import data into database
   - hint 1: [SQLite option from mungingdata](https://mungingdata.com/sqlite/create-database-load-csv-python/)
-  - hint 2: Use pandas in Python
-- Find holiday schedule (from [ltd.org/hours-holiday-service](https://www.ltd.org/hours-holiday-service/))
+  - ✅ hint 2: Use pandas in Python
+- ✅ Find holiday schedule (from [ltd.org/hours-holiday-service](https://www.ltd.org/hours-holiday-service/))
   - MLK (M Jan 16): M-F
   - Presidents (M Jan 16): M-F
   - Memorial (M May 29): Sun*
