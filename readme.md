@@ -41,34 +41,29 @@ The purpose of this project is to help keep an eye on the next bus departures in
 ## Status
 
 - MVP reached. With the sqlite DB file, a Python script can quickly display the next departure times.
-- Latest step: Imported all data into sqlite database using Python. Successfully read desired data back out.
-- Next step: Configure Python script to work with PostgreSQL database for API
+- Latest step: Imported data into sqlite database and created migration step to convert to Postgres.
+- Next step: Defining API.
 
 TODO:
 
-- ✅ Sort `stop_times_3.csv` to list all times
-- ✅ Find the pattern that differentiates weekdays/Saturdays/Sundays
-- ✅ Compare against [LTD Website](https://www.ltd.org/system-map/route_103/)
+- [x] Sort `stop_times_3.csv` to list all times
+- [x] Find the pattern that differentiates weekdays/Saturdays/Sundays
+- [x] Compare against [LTD Website](https://www.ltd.org/system-map/route_103/)
 - Import data into database
-  - ✅ hint 1: [SQLite option from mungingdata](https://mungingdata.com/sqlite/create-database-load-csv-python/)
-  - ✅ hint 2: Use pandas in Python
-- ✅ Find holiday schedule (from [ltd.org/hours-holiday-service](https://www.ltd.org/hours-holiday-service/))
-  - MLK (M Jan 16): M-F
-  - Presidents (M Jan 16): M-F
-  - Memorial (M May 29): Sun*
-  - Juneteenth (M Jun 19): M-F
-  - Independence (T Jul 4): Sun*
-  - Labor (M Sep 4): Sun*
-  - Indigenous (M Oct 9): M-F
-  - Veterans (Sa, Nov 11): Sat (normal)
-  - Thanksgiving (Th, Nov 23): No service!
-  - Day after (F, Nov 24): M-F
-  - Christmas eve (Su, Dec 24): Sun, but ends at 7:30!
-  - Christmas day (M, Dec 25): No service!
-  - New years (M, Jan 1, 2024): Sun*
-- Connect Python to Postgres database instead of sqlite. Replicate functionality.
-  - Try psycopg2. [Tutorial](https://www.postgresqltutorial.com/postgresql-python/connect/)
-  - 
+  - [x] hint 1: [SQLite option from mungingdata](https://mungingdata.com/sqlite/create-database-load-csv-python/)
+  - [x] hint 2: Use pandas in Python
+- [x] Find holiday schedule (from [ltd.org/hours-holiday-service](https://www.ltd.org/hours-holiday-service/))
+  
+- [x] Connect Python to Postgres database instead of sqlite. Replicate functionality.
+  - [x] Try `psycopg2`. [Tutorial](https://www.postgresqltutorial.com/postgresql-python/connect/) - compatibility issues.
+  - [x] Use `pgloader`. Success!
+  - [x] Direct connection no longer necessary. Use sqlite for local apps.
+- [ ] Create SQL queries for most useful lookups
+- [ ] Adjust table creation to make lookups more efficient.
+- [ ] Use the Jupyter notebooks to create the actual Python utilities.
+- [ ] Choose between REST and GraphQL
+- [ ] Create the API
+- [ ] Host API on railway
 
 ## Use Cases
 
@@ -79,7 +74,7 @@ TODO:
 - Looking through the printed schedule or navigating the website takes too long.
 - I want to know when I should leave to catch the next bus on time.
 - (Do I need to rush out the door in a full panic? Do I have time to go back and grab the thing I forgot? If I miss it, can I take the next bus and still be OK?)
-- I would like a display, web app, or widget to tell me the next times quickly.
+- I would like a physical display, web app, or widget to tell me the next times quickly.
 
 ### Heading home
 
