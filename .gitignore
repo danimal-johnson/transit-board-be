@@ -1,2 +1,21 @@
-.vscode
+
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# dotenv environment variables file
+.env
+
+# Typescript build directory
+build/
+
+npm-debug.log
+.DS_Store
+
+# VSCode configuration
+.vscode/
+
+# SQLite files
 *.db
