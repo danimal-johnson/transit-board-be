@@ -1,4 +1,4 @@
-# Bus Countdown Timer Project - Backend <!-- omit in toc -->
+# Transit Departure Board Project - Backend <!-- omit in toc -->
 
 ## Table of Contents
 
@@ -22,27 +22,33 @@
 
 ## Summary
 
-The purpose of this project is to help keep an eye on the next bus departures in a billboard format like the ones seen at subway and some bus stops. at my house that counts down the number of minutes until the next bus departs.
+The purpose of this project is to replicate the features of a transit departure board so it can be viewed from any location. A departure board shows the next departing buses or trains from a specific bus stop or rail platform.
+
+This is built for my specific needs, using data from Lane Transit District (LTD) in Oregon. Like most transit, LTD posts its data in the standard GTFS format (details below), but does not provide any API that can be directly polled for this information.
 
 ### Project scope
 
 1. Parse the GTFS data and extract useful information.
-2. Upload useful data to a database.
-3. Create an API to serve data to any device or app.
-4. Create a utility to update database when new GTFS data is released.
+2. Create a SQLite database for offline applications.
+3. Migrate data to a Postgres database.
+4. Create an API to serve data to any device or app.
+5. Create an integration utility to update database when new GTFS data is released.
 
 ### Justification
 
 1. The county transit website (LTD) is helpful for finding the best route to a new location, but too cumbersome to navigate for regularly-traveled routes (like your daily commute).
-2. The paper or PDF version of the printed schedule is even harder to manage. Time tables fill multiple pages. PM times are only differentiated by a slightly-bolder typeface - really hard to discern when flipping pages. It's easy to look up AM when you mean PM, etc.
-3. The current transit app (Umu) is a bit better at checking times, but not nearly as convenient as a quick glance.
+2. The current transit app (Umu) is a bit better at checking times, but not nearly as convenient as a quick glance.
+3. The paper or PDF version of the printed schedule is even harder to manage. Time tables fill multiple pages. PM times are only differentiated by a slightly-bolder typeface - really hard to discern when flipping pages. It's easy to look up AM when you mean PM, etc.
 4. A functional bus billboard would be really cool to have at my house!
 
 ## Status
 
-- MVP reached. With the sqlite DB file, a Python script can quickly display the next departure times.
-- Latest step: Imported data into sqlite database and created migration step to convert to Postgres.
-- Next step: Defining API.
+- SQLite database created.
+- Python script created to display board information in text format using SQLite.
+- Postgres database migration successful using `pgloader`
+- Imported data into sqlite database and created migration step to convert to Postgres.
+- Current step: Defining API.
+- Next step: Create express.js backend.
 
 TODO:
 
