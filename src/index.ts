@@ -1,15 +1,21 @@
-// require('dotenv').config();
 import 'dotenv/config';
 import express, { Request, Response, NextFunction } from 'express';
+import publicRouter from './data/routers/publicRouter';
 
-const app: express.Application = express();
+const server: express.Application = express();
 
-const PORT = process.env.PORT || 3000;
+// Middleware
+server.use(express.json());
 
-app.get('/', (req: Request, res: Response): void => {
+server.get('/', (req: Request, res: Response): void => {
   res.send('<h1>I see a departure board in your future!<h1>');
 });
 
-app.listen(PORT, (): void => {
+// Routes
+
+server.use('/api', publicRouter);
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, (): void => {
   console.log(`Server running on port ${PORT}`);
 });
