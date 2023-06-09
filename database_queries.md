@@ -78,7 +78,6 @@ INNER JOIN stops ON stop_times.stop_id=stops.stop_id
 WHERE trip_id IN (SELECT trip_id FROM trips WHERE route_id = '91');
 ```
 
-
 ### Calendar Dates
 
 - index: bigint
