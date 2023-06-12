@@ -11,11 +11,26 @@ router.get('/info', (req: Request, res: Response): void => {
   // Get the current time and convert it to Pacific time
   const now = new Date();
   const pacificTime = new Date(now.toLocaleString('en-US', {timeZone: 'America/Los_Angeles'}));
-  res.json({
-    message: 'Metadata about the API will go here',
-    localtime: pacificTime.toLocaleString()
-  });
-});
+
+  db.getAgencyInfo()
+    .then((agency: any) => {
+      const agencyTime = agency.agency_timezone;
+      res.json({
+        agency_id: agency.agency_id,
+        name: agency.agency_name,
+        url: agency.agency_url,
+        timezone: agencyTime,
+        language: agency.agency_lang,
+        utc_time: now.toUTCString(),
+        server_time: now.toLocaleString(),
+        local_time: now.toLocaleString('en-US', {timeZone: agencyTime})
+      });
+    })
+    .catch((err: Error) => {
+      console.error(err);
+      res.status(500).json({message: 'Something went wrong', error: err});
+    });
+ });
 
 // --------- Routes ----------
 

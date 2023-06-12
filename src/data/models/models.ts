@@ -5,6 +5,7 @@ const db = require('../db-config');
 // This export format mimics the CommonJS format by knexjs,
 // but can be imported as an ES module.
 export default {
+  getAgencyInfo,
   getAllRoutes,
   getRouteById,
   getStopById,
@@ -16,9 +17,13 @@ export default {
 
 function getServiceIdsByDate(date: string) {
   // Date is in YYYYMMDD format
-  return db('dates')
+  return db('calendar_dates')
     .where('date', date)
     .select('service_id');
+}
+
+function getAgencyInfo() {
+  return db('agency').first();
 }
 
 // ---------- Routes ----------
