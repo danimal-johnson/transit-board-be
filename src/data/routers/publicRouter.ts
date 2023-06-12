@@ -60,4 +60,35 @@ router.get('/stops', (req: Request, res: Response): void => {
     });
 });
 
+router.get('/stops/:id', (req: Request, res: Response): void => {
+  let { id } = req.params;
+  if (id === '1') id = '01'; // This is the only route with a leading zero
+
+  db.getStopById(id)
+    .then((route: any) => {
+      res.json(route);
+    })
+    .catch((err: Error) => {
+      console.error(err);
+      res.status(500).json({message: 'Something went wrong', error: err});
+    });
+});
+
+// --------- Departures ----------
+
+router.get('/departures', (req: Request, res: Response): void => {
+  let { stop, date, route } = req.query;
+  if (!stop || !date) {
+    res.status(400).json({message: 'Stop number and date are required.'});
+    return;
+  }
+  
+  db.getStopTimesByStopAndDate(stop, date, route)
+    .then((departures: any) => { res.json(departures); })
+    .catch((err: Error) => {
+      console.error(err);
+      res.status(500).json({message: 'Something went wrong', error: err});
+    });
+});
+
 export default router;
