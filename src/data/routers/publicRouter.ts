@@ -8,12 +8,12 @@ router.get('/', (req: Request, res: Response): void => {
 });
 
 router.get('/info', (req: Request, res: Response): void => {
-  // Get the current time and convert it to Pacific time
-  const now = new Date();
-  const pacificTime = new Date(now.toLocaleString('en-US', {timeZone: 'America/Los_Angeles'}));
+  let calendarStart = 0;
+  let calendarEnd = 0;
 
   db.getAgencyInfo()
     .then((agency: any) => {
+      const now = new Date();
       const agencyTime = agency.agency_timezone;
       res.json({
         agency_id: agency.agency_id,
@@ -21,6 +21,8 @@ router.get('/info', (req: Request, res: Response): void => {
         url: agency.agency_url,
         timezone: agencyTime,
         language: agency.agency_lang,
+        start_date: agency.start_date.date,
+        end_date: agency.end_date.date,
         utc_time: now.toUTCString(),
         server_time: now.toLocaleString(),
         local_time: now.toLocaleString('en-US', {timeZone: agencyTime})

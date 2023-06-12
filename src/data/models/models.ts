@@ -22,10 +22,38 @@ function getServiceIdsByDate(date: string) {
     .select('service_id');
 }
 
-function getAgencyInfo() {
-  return db('agency').first();
+async function getStartDate() {
+  return db('calendar_dates')
+    .select('date')
+    .orderBy('date')
+    .first();
 }
 
+async function getEndDate() {
+  return db('calendar_dates')
+    .select('date')
+    .orderBy('date', 'desc')
+    .first();
+}
+
+// ---- General Info Endpoints ----
+
+async function getAgencyInfo() {
+  const start_date = await getStartDate();
+  const end_date = await getEndDate();
+  const agencyInfo = await db('agency').first();
+  return { ...agencyInfo, start_date, end_date };
+}
+
+
+  // return "TESTING";
+  // let startDate = db('calendar_dates').min('date');
+  // console.log(startDate);
+  // let endDate = db('calendar_dates').max('date');
+  // console.log(endDate);
+  // console.log({ startDate, endDate })
+  // return { startDate, endDate };
+// }
 // ---------- Routes ----------
 
 function getAllRoutes() {
