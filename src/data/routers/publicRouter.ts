@@ -69,7 +69,7 @@ router.get('/routes/:id', (req: Request, res: Response): void => {
 
 // GET all stops for a route
 // Ex: "stops?route=01"
-// Expect: [{ stop_id }] of ALL stops on the route
+// Expect: [{ stop_id, stop_name }] of ALL stops on the route
 // Note: Not every trip will necessarily serve each stop.
 router.get('/stops', (req: Request, res: Response): void => {
   const route = req.query.route;

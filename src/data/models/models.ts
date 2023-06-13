@@ -82,7 +82,8 @@ async function getStopsByRoute(routeId: any) {
   
   return db('stop_times')
     .whereIn('trip_id', tripIdQuery)
-    .select('stop_id')
+    .join('stops', 'stop_times.stop_id', '=', 'stops.stop_id')
+    .select('stops.stop_id', 'stops.stop_name')
     .distinct();
 }
 
