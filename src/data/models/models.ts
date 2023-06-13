@@ -10,7 +10,7 @@ export default {
   getRouteById,
   getStopById,
   getStopsByRoute,
-  getStopTimesByStopAndDate,
+  getDeparturesByStopAndDate,
 };
 
 // ----- Helper functions -----
@@ -74,39 +74,21 @@ function getStopById(id: any) {
     .first();
 }
 
-
-// Get all stops for a route
-// FIXME: Too many columns error?
 async function getStopsByRoute(routeId: any) {
-// SELECT DISTINCT stop_times.stop_id, stops.stop_name
-// FROM stop_times
-// INNER JOIN stops ON stop_times.stop_id=stops.stop_id
-// WHERE trip_id IN (SELECT trip_id FROM trips WHERE route_id = '91');
   const tripIdQuery = db.select('trip_id')
     .distinct()
     .from('trips')
-    .where('route_id', routeId)
-    .select('trip_id');
-  console.log(typeof(tripIdQuery), tripIdQuery.length);
+    .where('route_id', routeId);
   
-  // return tripIdQuery;
-
-  // const stopQuery = db.select('stop_id', 'stop_name')
-
   return db('stop_times')
     .whereIn('trip_id', tripIdQuery)
     .select('stop_id')
     .distinct();
-    
-  //   .distinct()
-  //   .innerJoin('stop_times', 'stops.stop_id', 'stop_times.stop_id')
-  //   // .join('stop_times', 'stops.stop_id', 'stop_times.stop_id')
-  //   .whereIn('stop_id', tripIdQuery)
 }
 
 // ---------- Stop times ----------
 
-async function getStopTimesByStopAndDate(stopId: any, date: any, routeId?: any) {
+async function getDeparturesByStopAndDate(stopId: any, date: any, routeId?: any) {
 
   let query = db('stop_times')
     .select('departure_time', 'stop_headsign', 'trip_headsign')

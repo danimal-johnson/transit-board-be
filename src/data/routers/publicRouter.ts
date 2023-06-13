@@ -36,6 +36,7 @@ router.get('/info', (req: Request, res: Response): void => {
 
 // --------- Routes ----------
 
+// GET all routes
 router.get('/routes', (req: Request, res: Response): void => {
   db.getAllRoutes()
     .then((routes: any) => {
@@ -47,6 +48,9 @@ router.get('/routes', (req: Request, res: Response): void => {
     });
 });
 
+// GET details about a specific route
+// Example: "routes/91"
+// Expect: { index, route_id, route_short_name, route_long_name }
 router.get('/routes/:id', (req: Request, res: Response): void => {
   let { id } = req.params;
   if (id === '1') id = '01'; // This is the only route with a leading zero
@@ -63,6 +67,10 @@ router.get('/routes/:id', (req: Request, res: Response): void => {
 
 // --------- Stops ----------
 
+// GET all stops for a route
+// Ex: "stops?route=01"
+// Expect: [{ stop_id }] of ALL stops on the route
+// Note: Not every trip will necessarily serve each stop.
 router.get('/stops', (req: Request, res: Response): void => {
   const route = req.query.route;
   if (!route) {
@@ -77,6 +85,10 @@ router.get('/stops', (req: Request, res: Response): void => {
     });
 });
 
+// GET details for a specific stop
+// Example: "stops/02507"
+// Expect: {index, stop_id, stop_name, stop_lat, stop_lon,
+//          parent_station, platform_code}
 router.get('/stops/:id', (req: Request, res: Response): void => {
   let { id } = req.params;
   if (id === '1') id = '01'; // This is the only route with a leading zero
@@ -93,14 +105,17 @@ router.get('/stops/:id', (req: Request, res: Response): void => {
 
 // --------- Departures ----------
 
+// GET departure times for a stop [and route] on a specific date
+// Ex: "departures?stop=02507&date=20230714&route=01"
+// Stop and date are required; route is optional
+// Expect: [{{departure_time}, {stop_headsign}, {trip_headsign}}]
 router.get('/departures', (req: Request, res: Response): void => {
   let { stop, date, route } = req.query;
   if (!stop || !date) {
     res.status(400).json({message: 'Stop number and date are required.'});
     return;
   }
-  
-  db.getStopTimesByStopAndDate(stop, date, route)
+  db.getDeparturesByStopAndDate(stop, date, route)
     .then((departures: any) => { res.json(departures); })
     .catch((err: Error) => {
       console.error(err);
