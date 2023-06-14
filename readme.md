@@ -1,10 +1,9 @@
 # Transit Departure Board Backend <!-- omit in toc -->
 
 [API Specification](./docs/endpoints.md)
+[Jump to quick-start guide](#quick-start)
 
 ## Table of Contents
-
-[Jump to quick-start guide](#quick-start)
 
 <details>
 
@@ -15,6 +14,7 @@
   - [Project purpose](#project-purpose)
   - [Project scope](#project-scope)
 - [Status](#status)
+- [Data Sources](#data-sources)
 - [Quick Start](#quick-start)
   - [Import your transit data](#import-your-transit-data)
   - [Migrate the data (optional)](#migrate-the-data-optional)
@@ -26,25 +26,26 @@
     - [Leaving the house](#leaving-the-house)
     - [Heading home](#heading-home)
     - [Hobbyists and makers](#hobbyists-and-makers)
-- [Data Sources](#data-sources)
 
 </details>
 
 ## Summary
 
+Create an API to serve departure times to homebrew transit boards and apps.
+
 ### Project purpose
 
 Create an API to feed departure times to departure boards at bus stops and train platforms. While transit data is often public, it is not readily accessible by IOT devices and web frontends.
 
-Providing an API will make it possible to:
+Providing an API makes it possible to:
 
-- make it possible to add a departure board anywhere with an internet connection
+- add a departure board anywhere with an internet connection
 - create desktop and mobile apps that replicate departure board functionality
 - know when you need to leave to catch the next/last bus or train
 
 This is built for my specific needs, using data from Lane Transit District (LTD) in Oregon. It publishes its data in a standard GTFS format. The format is flexible and agencies may implement it differently, but this project could serve as a starting point for other systems.
 
-[LTD GTFS details](./docs/gtfs_data.md)
+[LTD's GTFS details](./docs/gtfs_data.md)
 
 ### Project scope
 
@@ -75,6 +76,19 @@ TODO:
 - [x] Use the Jupyter notebooks to create the actual Python utilities.
 - [ ] Remove extraneous notes from this README file.
 - [ ] Deploy
+
+## Data Sources
+
+There is no direct public API to poll for this data, but data is published in a standardized fomat called GTFS.
+
+- [Google Transit](https://developers.google.com/transit/gtfs)
+- GTFS service on [gtfs.org](https://gtfs.org/schedule/reference/)
+- Transitfeeds [LTD info](https://transitfeeds.com/p/lane-transit-district)
+- Transitfeeds [LTD configuration](https://transitfeeds.com/p/lane-transit-district/314/latest)
+- Transitfeeds is being replaced by [Mobility Database](https://database.mobilitydata.org/)
+- [Oregon-specific site](https://oregon-gtfs.com/)
+- [LTD's feed](http://feed.ltd.org/gtfs-realtime/gtfs) (zip file)
+- [CSV file of links](./resources/sources.csv)
 
 ## Quick Start
 
@@ -146,10 +160,17 @@ If you are not using a Postgres database, modify the `knexfile.js` file in the r
 
 ```bash
 npm i
-nm run start
+npm run start
 ```
 
-Done! You should be able to access the API from your local machine (ex: `http://localhost:port/api/routes`)
+**Done!** You should be able to access the API from your local machine (ex: `http://localhost:port/api/routes`)
+
+Test a release build:
+
+```bash
+npm run build
+npm run start
+```
 
 ## Motivation
 
@@ -166,7 +187,7 @@ Done! You should be able to access the API from your local machine (ex: `http://
 
 - My house is a 15-minute walk to the bus station with buses spaced up to 30 minutes apart.
 - I want to know when I should leave to catch the next bus on time.
-- (Do I need to rush out the door in a full panic? Do I have time to go back and grab the thing I forgot? If I miss it, can I take the next bus and still be OK?)
+  - (Do I need to rush out the door in a full panic? Do I have time to go back and grab the thing I forgot? If I miss it, can I take the next bus and still be OK?)
 - Looking through the printed schedule or navigating the website takes too long.
 - I would like a physical display, web app, or widget to tell me the next times quickly.
 
@@ -183,15 +204,3 @@ Done! You should be able to access the API from your local machine (ex: `http://
 - Artists can add their own creative touches to designs
 - No subscription services are required
 
-## Data Sources
-
-There is no direct public API to poll for this data, but data is published in a standardized fomat called GTFS.
-
-- [Google Transit](https://developers.google.com/transit/gtfs)
-- GTFS service on [gtfs.org](https://gtfs.org/schedule/reference/)
-- Transitfeeds [LTD info](https://transitfeeds.com/p/lane-transit-district)
-- Transitfeeds [LTD configuration](https://transitfeeds.com/p/lane-transit-district/314/latest)
-- Transitfeeds is being replaced by [Mobility Database](https://database.mobilitydata.org/)
-- [Oregon-specific site](https://oregon-gtfs.com/)
-- [LTD's feed](http://feed.ltd.org/gtfs-realtime/gtfs) (zip file)
-- [CSV file of links](./resources/sources.csv)
