@@ -61,7 +61,7 @@ This is built for my specific needs, using data from Lane Transit District (LTD)
 - Python script created to display board information in text format using SQLite.
 - Defined API.
 - Created express.js backend
-- Next-step: Add quick-start section to this page.
+- Created quick-start section on this page.
 - Next-next-step: Deploy!
 
 TODO:
@@ -72,7 +72,7 @@ TODO:
   - [x] Use `pgloader`. Success!
   - [x] Direct connection no longer necessary. Use sqlite for local apps.
 - [x] Add quick-start instructions to this file.
-- [ ] Use the Jupyter notebooks to create the actual Python utilities.
+- [x] Use the Jupyter notebooks to create the actual Python utilities.
 - [ ] Remove extraneous notes from this README file.
 - [ ] Deploy
 

@@ -19,3 +19,8 @@ npm-debug.log
 
 # SQLite files
 *.db
+
+# GTFS files
+gtfs/*.zip
+gtfs/*.txt
+
