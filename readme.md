@@ -93,10 +93,11 @@ The following Python script will parse the files and import the data into a SQLi
 
 ```bash
 cd utils
-gtfs2db
+# If you have an existing DB, back it up by renaming it
+mv my_data.db my_data.old.db
+# Create the new DB
+./gtfs2db.py
 ```
-
-TODO: Create `gtfs2db` utility using code from notebooks
 
 ### Migrate the data (optional)
 
