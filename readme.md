@@ -146,6 +146,7 @@ PORT="3000"        // API port when not specified by the environment
 USE_HTTPS="false"  // For local development  TODO: Is this necessary?
 
 # Postgres example
+PG_HOSTNAME = "127.0.0.1"
 PG_PORT = 5432
 PG_USER = "my_pg_username"
 PG_PASSWORD = "my_pg_password"
