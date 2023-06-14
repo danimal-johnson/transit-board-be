@@ -1,6 +1,10 @@
 # Transit Departure Board Project - Backend <!-- omit in toc -->
 
+[API Specification](./docs/endpoints.md)
+
 ## Table of Contents
+
+[Jump to quick-start guide](#quick-start)
 
 <details>
 
@@ -11,6 +15,11 @@
   - [Project scope](#project-scope)
   - [Justification](#justification)
 - [Status](#status)
+- [Quick Start](#quick-start)
+  - [Import your transit data](#import-your-transit-data)
+  - [Migrate the data (optional)](#migrate-the-data-optional)
+  - [Configure the server for your database](#configure-the-server-for-your-database)
+  - [Install npm packages and run](#install-npm-packages-and-run)
 - [Use Cases](#use-cases)
   - [Leaving the house](#leaving-the-house)
   - [Heading home](#heading-home)
@@ -44,32 +53,95 @@ This is built for my specific needs, using data from Lane Transit District (LTD)
 ## Status
 
 - SQLite database created.
-- Python script created to display board information in text format using SQLite.
 - Postgres database migration successful using `pgloader`
-- Imported data into sqlite database and created migration step to convert to Postgres.
-- Current step: Defining API.
-- Next step: Create express.js backend.
+- Python script created to display board information in text format using SQLite.
+- Defined API.
+- Created express.js backend
+- Next-step: Add quick-start section to this page.
+- Next-next-step: Deploy!
 
 TODO:
 
-- [x] Sort `stop_times_3.csv` to list all times
-- [x] Find the pattern that differentiates weekdays/Saturdays/Sundays
-- [x] Compare against [LTD Website](https://www.ltd.org/system-map/route_103/)
-- Import data into database
-  - [x] hint 1: [SQLite option from mungingdata](https://mungingdata.com/sqlite/create-database-load-csv-python/)
-  - [x] hint 2: Use pandas in Python
 - [x] Find holiday schedule (from [ltd.org/hours-holiday-service](https://www.ltd.org/hours-holiday-service/))
-  
 - [x] Connect Python to Postgres database instead of sqlite. Replicate functionality.
   - [x] Try `psycopg2`. [Tutorial](https://www.postgresqltutorial.com/postgresql-python/connect/) - compatibility issues.
   - [x] Use `pgloader`. Success!
   - [x] Direct connection no longer necessary. Use sqlite for local apps.
-- [ ] Create SQL queries for most useful lookups
-- [ ] Adjust table creation to make lookups more efficient.
+- [x] Add quick-start instructions to this file.
 - [ ] Use the Jupyter notebooks to create the actual Python utilities.
-- [ ] Choose between REST and GraphQL
-- [ ] Create the API
-- [ ] Host API on railway
+- [ ] Remove extraneous notes from this README file.
+- [ ] Deploy
+
+## Quick Start
+
+### Import your transit data
+
+Unzip your GTFS.zip data file into the `./gtfs` directory. The following steps require these 6 files and ignore all others:
+
+1. `agency.txt`
+2. `calendar_dates.txt`
+3. `routes.txt`
+4. `stop_times.txt`
+5. `stops.txt`
+6. `trips.txt`
+
+The following Python script will parse the files and import the data into a SQLite database.
+
+```bash
+cd utils
+gtfs2db
+```
+
+TODO: Create `gtfs2db` utility using code from notebooks
+
+### Migrate the data (optional)
+
+If you are plan to use SQLite as your database of choice, you can skip this step.
+
+You have many options from this point, depending on which database server you will be using.
+
+For Postgres, here are the instructions for the [pgloader](https://pgloader.io/) utility:
+
+Install `pgloader`
+
+```bash
+sudo apt-get update && sudo apt-get install pgloader
+```
+
+Run it.
+
+```bash
+cd utils
+pgloader my_data.db
+```
+
+### Configure the server for your database
+
+Create a file called `.env` in the root of this project folder and add connection details for your database. Example:
+
+```text
+PORT="3000"        // API port when not specified by the environment
+USE_HTTPS="false"  // For local development  TODO: Is this necessary?
+
+# Postgres example
+PG_PORT = 5432
+PG_USER = "my_pg_username"
+PG_PASSWORD = "my_pg_password"
+PG_DATABASE_NAME = "my_db_name"
+```
+
+Make sure there is a `.env` line in your `.gitignore` file.
+
+If you are not using a Postgres database, modify the `knexfile.js` file in the root directory for your situation. See [the documentation](https://knexjs.org/guide/) for details.
+
+### Install npm packages and run
+
+```bash
+npm i
+nm run start
+```
+
+Done! You should be able to access the API from your local machine (ex: `http://localhost:port/api/routes`)
 
 ## Use Cases
 
@@ -84,7 +156,7 @@ TODO:
 
 ### Heading home
 
-- Buses service is 30 minutes apart. The last bus leaves at different times on weekdays, Saturdays, Sundays, and holidays. It's easy to lose track.
+- Bus service is 30 minutes apart. The last bus leaves at different times on weekdays, Saturdays, Sundays, and holidays. It's easy to lose track.
 - I would like to look at an app on my phone to see a billboard-like display of minutes until the next departure, time of the next departures, and time of the last departure of the day.
 
 Stretch goal: create an API that works for other stations

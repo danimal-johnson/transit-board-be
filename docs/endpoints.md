@@ -1,5 +1,6 @@
 # API Specification
 
+[Back to readme document](../readme.md)
 ## GET requests
 
 Note: *All* endpoints are of type `GET`. The database is treated as read-only through this public-facing API.
