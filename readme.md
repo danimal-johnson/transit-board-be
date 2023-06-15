@@ -1,6 +1,7 @@
 # Transit Departure Board Backend <!-- omit in toc -->
 
 [API Specification](./docs/endpoints.md)
+
 [Jump to quick-start guide](#quick-start)
 
 ## Table of Contents
@@ -20,12 +21,6 @@
   - [Migrate the data (optional)](#migrate-the-data-optional)
   - [Configure the server for your database](#configure-the-server-for-your-database)
   - [Install npm packages and run](#install-npm-packages-and-run)
-- [Motivation](#motivation)
-  - [Justification](#justification)
-  - [Use Cases](#use-cases)
-    - [Leaving the house](#leaving-the-house)
-    - [Heading home](#heading-home)
-    - [Hobbyists and makers](#hobbyists-and-makers)
 
 </details>
 
@@ -43,7 +38,7 @@ Providing an API makes it possible to:
 - create desktop and mobile apps that replicate departure board functionality
 - know when you need to leave to catch the next/last bus or train
 
-This is built for my specific needs, using data from Lane Transit District (LTD) in Oregon. It publishes its data in a standard GTFS format. The format is flexible and agencies may implement it differently, but this project could serve as a starting point for other systems.
+This is built for my [specific needs](./docs/motivation.md), using data from Lane Transit District (LTD) in Oregon. It publishes its data in a standard GTFS format. The format is flexible and agencies may implement it differently, but this project could serve as a starting point for other systems.
 
 [LTD's GTFS details](./docs/gtfs_data.md)
 
@@ -63,7 +58,7 @@ This is built for my specific needs, using data from Lane Transit District (LTD)
 - Defined API.
 - Created express.js backend
 - Created quick-start section on this page.
-- Next-next-step: Deploy!
+- Deployed!
 
 TODO:
 
@@ -74,8 +69,8 @@ TODO:
   - [x] Direct connection no longer necessary. Use sqlite for local apps.
 - [x] Add quick-start instructions to this file.
 - [x] Use the Jupyter notebooks to create the actual Python utilities.
-- [ ] Remove extraneous notes from this README file.
-- [ ] Deploy
+- [x] Remove extraneous notes from this README file.
+- [x] Deploy
 
 ## Data Sources
 
@@ -172,36 +167,3 @@ Test a release build:
 npm run build
 npm run start
 ```
-
-## Motivation
-
-### Justification
-
-1. The county transit website (LTD) is helpful for finding the best route to a new location, but too cumbersome to navigate for regularly-traveled routes (like your daily commute).
-2. The current transit app (Umu) is a bit better at checking times, but not nearly as convenient as a quick glance.
-3. The paper or PDF version of the printed schedule is much harder to manage. Time tables fill multiple pages. PM times are only differentiated by a slightly-bolder typeface - really hard to discern when flipping pages. It's easy to look up AM when you mean PM, etc.
-4. A functional bus departure display would be really cool to have at my house!
-
-### Use Cases
-
-#### Leaving the house
-
-- My house is a 15-minute walk to the bus station with buses spaced up to 30 minutes apart.
-- I want to know when I should leave to catch the next bus on time.
-  - (Do I need to rush out the door in a full panic? Do I have time to go back and grab the thing I forgot? If I miss it, can I take the next bus and still be OK?)
-- Looking through the printed schedule or navigating the website takes too long.
-- I would like a physical display, web app, or widget to tell me the next times quickly.
-
-#### Heading home
-
-- Bus service is 30 minutes apart. The last bus leaves at different times on weekdays, Saturdays, Sundays, and holidays. It's easy to miss the last bus because I am looking at the wrong schedule.
-- Missing the last bus means a 2-hour walk home.
-- I would like to look at an app on my phone to see a billboard-like display of next departure times, and the time of the last departure of the day.
-
-#### Hobbyists and makers
-
-- Lowers the bar for web developers to create front-end apps
-- Allows tinkerers and makers to create standalone displays using cheap hardware
-- Artists can add their own creative touches to designs
-- No subscription services are required
-

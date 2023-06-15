@@ -1,16 +1,30 @@
+
 import { Router, Request, Response, NextFunction} from "express";
 import db from '../models/models';
 
 const router: Router = Router();
 
 router.get('/', (req: Request, res: Response): void => {
-  res.send('<h2>Welcome to the API portion of the tour!<h2>');
+  res.send(`<h1>Congrats! You found the API directory.<h1>\
+  <h2>The Docs</h2>\
+  <ul>\
+  <li><a href="https://github.com/danimal-johnson/transit-board-be">Visit the full project on GitHub</a></li>\
+  <li><a href="https://github.com/danimal-johnson/transit-board-be/blob/main/docs/endpoints.md">API Documentation (markdown)</a></li>\
+  </ul>\
+  <h2>Something to get you started</h2>\
+  <ul>\
+  <li>/info: Agency info, calendar range covered, current date and time</li>\
+  <li>/routes: All the routes served by this API</li>\
+  <li>/routes/91: Details about a specific route</li>\
+  <li>/stops?route=01: All the stops on a route</li>\
+  <li>/stops/02507: Details about a specific stop</li>\
+  <li>/departures?stop=02507&date=20230624&route=01: All departures for a stop and date\
+  <li>/departures?stop=02507&route=01&time=12:00:00: Departures for a route, stop, and date</li>\
+  </ul>\
+  `);
 });
 
 router.get('/info', (req: Request, res: Response): void => {
-  let calendarStart = 0;
-  let calendarEnd = 0;
-
   db.getAgencyInfo()
     .then((agency: any) => {
       const now = new Date();

@@ -1,6 +1,7 @@
 # API Specification
 
 [Back to readme document](../readme.md)
+
 ## GET requests
 
 Note: *All* endpoints are of type `GET`. The database is treated as read-only through this public-facing API.
@@ -36,7 +37,8 @@ Returns meta information about the database. Expect a single JSON object with th
 
 - `timezone` example: "America/Los_Angeles"
 - `start_date` and `end_date` are in the form "YYYYMMDD"
-- `utc_time` is in the format "YYYY-MM-DDTHH:MM:SS.mmmZ"
+- ~~`utc_time` is in the format "YYYY-MM-DDTHH:MM:SS.mmmZ"~~
+- `utc_time` format may vary depending on the server's implementation
 - `server_time` and `local_time` format may depend on user's locale
 
 ### Routes
@@ -100,7 +102,7 @@ Returns an array of all stop IDs and names on a route, by route ID. Useful for s
 - REQUIRED: `&date=[YYYYMMDD]`
 - OPTIONAL: `&route=[id]` - limits results to a single route
 
-Returns a list of all departure times from a given stop on a given date, along with the associated headsigns. 
+Returns a list of all departure times from a given stop on a given date, along with the associated headsigns.
 
 ```js
 [{
@@ -109,4 +111,3 @@ Returns a list of all departure times from a given stop on a given date, along w
   trip_headsign   // ex: "103 EmX WEST 11TH <> COMMERCE STATION"
 }]
 ```
-
