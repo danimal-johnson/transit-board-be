@@ -52,25 +52,18 @@ This is built for my [specific needs](./docs/motivation.md), using data from Lan
 
 ## Status
 
-- SQLite database created.
-- Postgres database migration successful using `pgloader`
-- Python script created to display board information in text format using SQLite.
-- Defined API.
-- Created express.js backend
-- Created quick-start section on this page.
-- Deployed!
+- [x] `gtfs2db` utility produces SQLite database from GTFS files.
+- [x] Postgres database migration successful using `pgloader`
+- [x] Python script can display departure information as text from SQLite.
+- [x] Created REST API using Express and Node.
+- [x] Deployed! Visible at [https://transit-board-be.up.railway.app/](https://transit-board-be.up.railway.app/)
 
 TODO:
 
-- [x] Find holiday schedule (from [ltd.org/hours-holiday-service](https://www.ltd.org/hours-holiday-service/))
-- [x] Connect Python to Postgres database instead of sqlite. Replicate functionality.
-  - [x] Try `psycopg2`. [Tutorial](https://www.postgresqltutorial.com/postgresql-python/connect/) - compatibility issues.
-  - [x] Use `pgloader`. Success!
-  - [x] Direct connection no longer necessary. Use sqlite for local apps.
-- [x] Add quick-start instructions to this file.
-- [x] Use the Jupyter notebooks to create the actual Python utilities.
-- [x] Remove extraneous notes from this README file.
-- [x] Deploy
+- [ ] Cleanup deelopment files
+  - [ ] `./docs/gtfs_data`
+  - [ ] `./utils/*.ipynb`
+- [ ] Improve html landing pages at `/` and `/api` 
 
 ## Data Sources
 
