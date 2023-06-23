@@ -18,8 +18,8 @@ router.get('/', (req: Request, res: Response): void => {
   <li>/routes/91: Details about a specific route</li>\
   <li>/stops?route=01: All the stops on a route</li>\
   <li>/stops/02507: Details about a specific stop</li>\
-  <li>/departures?stop=02507&date=20230624&route=01: All departures for a stop and date\
-  <li>/departures?stop=02507&route=01&time=12:00:00: Departures for a route, stop, and date</li>\
+  <li>/departures?stop=02507&date=20230624: All departures for a stop and date</li>\
+  <li>/departures?stop=02507&date=20230624&route=01: Departures for a stop, date, and route</li>\
   </ul>\
   `);
 });
