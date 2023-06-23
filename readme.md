@@ -77,6 +77,9 @@ There is no direct public API to poll for this data, but data is published in a 
 - [Oregon-specific site](https://oregon-gtfs.com/)
 - [LTD's feed](http://feed.ltd.org/gtfs-realtime/gtfs) (zip file)
 - [CSV file of links](./resources/sources.csv)
+- LTD Service Alerts [XML RSS Feed](https://www.ltd.org/service_alerts_rss.php)
+- [Toptal](https://www.toptal.com/developers/feed2json/)  converts RSS to JSON using the [npm feedparser library](https://www.npmjs.com/package/feedparser) (formerly feed2json.org)
+- Ex: https://www.toptal.com/developers/feed2json/convert?url=https%3A%2F%2Fwww.ltd.org%2Fservice_alerts_rss.php
 
 ## Quick Start
 
