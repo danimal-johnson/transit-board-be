@@ -120,7 +120,8 @@ router.get('/stops/:id', (req: Request, res: Response): void => {
 // --------- Departures ----------
 
 // GET departure times for a stop [and route] on a specific date
-// Ex: "departures?stop=02507&date=20230714&route=01"
+// Ex1: "departures?stop=02507&date=20230714&route=01"
+// Ex2: "departures?stop=02507&date=today"
 // Stop and date are required; route is optional
 // Expect: [{{departure_time}, {stop_headsign}, {trip_headsign}}]
 router.get('/departures', (req: Request, res: Response): void => {

@@ -94,7 +94,7 @@ async function getDeparturesByStopAndDate(stopId: any, date: any, routeId?: any)
   let query = db('stop_times')
     .select('departure_time', 'stop_headsign', 'trip_headsign')
     .where('stop_id', stopId)
-    .whereIn('service_id', getServiceIdsByDate('20230605'))
+    .whereIn('service_id', getServiceIdsByDate(date))
     .orderBy('departure_time');
 
     if (routeId) {

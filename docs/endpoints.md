@@ -99,15 +99,15 @@ Returns an array of all stop IDs and names on a route, by route ID. Useful for s
 #### `GET /api/departures?`
 
 - REQUIRED: `?stop=[id]`
-- REQUIRED: `&date=[YYYYMMDD]`
+- REQUIRED: `&date=[YYYYMMDD]` or `&date=today`
 - OPTIONAL: `&route=[id]` - limits results to a single route
 
 Returns a list of all departure times from a given stop on a given date, along with the associated headsigns.
 
 ```js
 [{
-  departure_time  // ex: "16:12:00"
-  stop_headsign   // ex: "101 EmX EUGENE STATION"
-  trip_headsign   // ex: "103 EmX WEST 11TH <> COMMERCE STATION"
+  departure_time,  // ex: "16:12:00"
+  stop_headsign,   // ex: "101 EmX EUGENE STATION"
+  trip_headsign,   // ex: "103 EmX WEST 11TH <> COMMERCE STATION"
 }]
 ```
