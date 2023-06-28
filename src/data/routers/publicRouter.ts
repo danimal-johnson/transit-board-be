@@ -129,6 +129,13 @@ router.get('/departures', (req: Request, res: Response): void => {
     res.status(400).json({message: 'Stop number and date are required.'});
     return;
   }
+  if (date === 'today') {
+    // The API is served from random timezones. Convert to Pacific.
+    let currentDate = new Date().toLocaleDateString("en-GB", {timeZone: "America/Los_Angeles"}).replace(/\//g, "-");
+    // GB format is DD-MM-YYYY. Convert to YYYYMMDD
+    date = currentDate.split('-').reverse().join('');
+    console.log(`Interpreting today as ${date}`);
+  }
   db.getDeparturesByStopAndDate(stop, date, route)
     .then((departures: any) => { res.json(departures); })
     .catch((err: Error) => {
