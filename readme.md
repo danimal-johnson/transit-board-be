@@ -152,7 +152,7 @@ If you are not using a Postgres database, modify the `knexfile.js` file in the r
 
 ```bash
 npm i
-npm run start
+npm run dev
 ```
 
 **Done!** You should be able to access the API from your local machine (ex: `http://localhost:port/api/routes`)

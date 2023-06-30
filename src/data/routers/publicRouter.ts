@@ -4,26 +4,6 @@ import db from '../models/models';
 
 const router: Router = Router();
 
-router.get('/', (req: Request, res: Response): void => {
-  res.send(`<h1>Congrats! You found the API directory.<h1>\
-  <h2>The Docs</h2>\
-  <ul>\
-  <li><a href="https://github.com/danimal-johnson/transit-board-be">Visit the full project on GitHub</a></li>\
-  <li><a href="https://github.com/danimal-johnson/transit-board-be/blob/main/docs/endpoints.md">API Documentation (markdown)</a></li>\
-  </ul>\
-  <h2>Something to get you started</h2>\
-  <ul>\
-  <li>/info: Agency info, calendar range covered, current date and time</li>\
-  <li>/routes: All the routes served by this API</li>\
-  <li>/routes/91: Details about a specific route</li>\
-  <li>/stops?route=01: All the stops on a route</li>\
-  <li>/stops/02507: Details about a specific stop</li>\
-  <li>/departures?stop=02507&date=20230624: All departures for a stop and date</li>\
-  <li>/departures?stop=02507&date=20230624&route=01: Departures for a stop, date, and route</li>\
-  </ul>\
-  `);
-});
-
 router.get('/info', (req: Request, res: Response): void => {
   db.getAgencyInfo()
     .then((agency: any) => {

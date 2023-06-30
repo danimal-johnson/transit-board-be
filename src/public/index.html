@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Departure Board API for <i>Lane Transit District (LTD)</i><sup>*</sup></h1>
+    <p>*This site is in no way affiliated with Lane Transit District or any other official entity of Lane County, Oregon</p>
+
+    <h2>An API for GTFS transit info</h2>
+
+    <ul>
+      <li><a href="https://github.com/danimal-johnson/transit-board-be/blob/main/docs/endpoints.md">API endpoint documentation (Markdown Format)</a></li>
+      <li><a href="https://github.com/danimal-johnson/transit-board-be">Full project on GitHub</a></li>
+      <li>Example app that uses this API: <a href="https://github.com/danimal-johnson/departure-board-app">On GitHub</a> | <a href="https://ltd-departures.vercel.app/">Deployed</a></li>
+    </ul>
+
+    <h2>Quickstart</h2>
+
+    <h3>API Key</h3>
+
+    <p>None required. This is a read-only API. As long as it isn't abused, it can remain open to the public.</p>
+
+    <h3>Tips</h3>
+
+    <ul>
+      <li>All requests are of type <code>GET</code></li>
+      <li>All endpoints start with the prefix of <code>/api</code></li>
+      <li>To see the full documentation, including motivations and use cases, view the project on <a href="https://github.com/danimal-johnson/transit-board-be">GitHub</a>.</li>
+    </ul>
+
+    <h3>Some examples to get you going</h3>
+
+    Agency info, calendar range covered, current date and time:
+    <div class="example">
+      /api/info
+    </div>
+
+    All the transit routes served by this API:
+    <div class="example">
+      /api/routes
+    </div>
+
+    Details about a specific route:
+    <div class="example">
+      /api/routes/91
+    </div>
+    
+    All the stops on a route:
+    <div class="example">
+      /api/stops?route=01
+    </div>
+
+    Details about a specific stop:
+    <div class="example">
+      /api/stops/02507
+    </div>
+
+    All of today's departures for a stop:
+    <div class="example">
+      /api/departures?stop=02507&date=today
+    </div>
+    
+    Departures for a stop, date, and route:
+    <div class="example">
+      /api/departures?stop=02507&date=20230624&route=01
+    </div>
+  </div>
+</body>
+</html>
