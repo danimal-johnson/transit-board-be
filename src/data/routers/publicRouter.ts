@@ -24,7 +24,7 @@ router.get('/info', (req: Request, res: Response): void => {
     })
     .catch((err: Error) => {
       console.error(err);
-      res.status(500).json({message: 'Something went wrong', error: err});
+      res.status(500).json({message: 'Something went wrong', error: err.message});
     });
  });
 
@@ -38,7 +38,7 @@ router.get('/routes', (req: Request, res: Response): void => {
     })
     .catch((err: Error) => {
       console.error(err);
-      res.status(500).json({message: 'Something went wrong', error: err});
+      res.status(500).json({message: 'Something went wrong', error: err.message});
     });
 });
 
@@ -51,11 +51,11 @@ router.get('/routes/:id', (req: Request, res: Response): void => {
 
   db.getRouteById(id)
     .then((route: any) => {
-      res.json(route);
+      res.json(route || {});
     })
     .catch((err: Error) => {
       console.error(err);
-      res.status(500).json({message: 'Something went wrong', error: err});
+      res.status(500).json({message: 'Something went wrong', error: err.message});
     });
 });
 
@@ -72,10 +72,12 @@ router.get('/stops', (req: Request, res: Response): void => {
     return;
   }
   db.getStopsByRoute(route)
-    .then((stops: any) => { res.json(stops); })
+    .then((stops: any) => { 
+      res.json(stops || []);
+    })
     .catch((err: Error) => {
       console.error(err);
-      res.status(500).json({message: 'Something went wrong', error: err});
+      res.status(500).json({message: 'Something went wrong', error: err.message});
     });
 });
 
@@ -89,11 +91,11 @@ router.get('/stops/:id', (req: Request, res: Response): void => {
 
   db.getStopById(id)
     .then((route: any) => {
-      res.json(route);
+      res.json(stop || {});
     })
     .catch((err: Error) => {
       console.error(err);
-      res.status(500).json({message: 'Something went wrong', error: err});
+      res.status(500).json({message: 'Something went wrong', error: err.message});
     });
 });
 
@@ -115,13 +117,15 @@ router.get('/departures', (req: Request, res: Response): void => {
     let currentDate = new Date().toLocaleDateString("en-GB", {timeZone: "America/Los_Angeles"}).replace(/\//g, "-");
     // GB format is DD-MM-YYYY. Convert to YYYYMMDD
     date = currentDate.split('-').reverse().join('');
-    console.log(`Interpreting today as ${date}`);
+    // console.log(`Interpreting today as ${date}`);
   }
   db.getDeparturesByStopAndDate(stop, date, route)
-    .then((departures: any) => { res.json(departures); })
+    .then((departures: any) => {
+      res.json(departures);
+    })
     .catch((err: Error) => {
       console.error(err);
-      res.status(500).json({message: 'Something went wrong', error: err});
+      res.status(500).json({message: 'Something went wrong', error: err.message});
     });
 });
 
