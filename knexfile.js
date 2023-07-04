@@ -50,8 +50,17 @@ module.exports = {
     },
     pool: {
       min: 2,
-      max: 10
-    }
+      max: 10,
+      // createTimeoutMillis: 3000,
+      // acquireTimeoutMillis: 30000,
+      // idleTimeoutMillis: 30000,
+      // reapIntervalMillis: 1000,
+      // createRetryIntervalMillis: 100,
+      // See https://github.com/knex/knex/issues/2820 for the next line
+      propagateCreateError: false // "true" prevents reconnection attempts in Knex!
+    },
+    // Knex may not be reading timeouts from inside the pool object
+    // See github.com/strapi/strapi/issues/11860 thread for more info
+    acquireConnectionTimeout: 60000 // Should be the default
   },
-
 };
