@@ -87,10 +87,9 @@ router.get('/stops', (req: Request, res: Response): void => {
 //          parent_station, platform_code}
 router.get('/stops/:id', (req: Request, res: Response): void => {
   let { id } = req.params;
-  if (id === '1') id = '01'; // This is the only route with a leading zero
 
   db.getStopById(id)
-    .then((route: any) => {
+    .then((stop: any) => {
       res.json(stop || {});
     })
     .catch((err: Error) => {
