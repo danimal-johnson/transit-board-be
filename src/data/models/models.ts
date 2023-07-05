@@ -96,7 +96,6 @@ async function getDeparturesByStopAndDate(stopId: any, date: any, routeId?: any)
 
     return query;
 }
-// where and andWhere seem to be the same
 
 // async function getStopsByRoute(routeId: any) {
 //   const tripIdQuery = db.select('trip_id')
@@ -111,16 +110,7 @@ async function getDeparturesByStopAndDate(stopId: any, date: any, routeId?: any)
 //     .distinct();
 // }
 
-// async function getAllStations() {
-//   const subquery = db('stops')
-//     .whereNotNull('parent_station')
-//     .select('parent_station')
-//     .distinct();
-
-//   const myArr: string[] = ['hello'];
-//   await myArr.push(subquery);
-//   console.log("myArr =", myArr);
-// }
+// ---------- Stations ----------
 
 async function getAllStations(/* db: Knex */): 
   Promise<{ stop_id: string, stop_name: string, stop_lat: string, stop_long: string }[]> {
@@ -134,11 +124,11 @@ async function getAllStations(/* db: Knex */):
     const records: DatabaseRecord[] = await db.select('parent_station')
       .from('stops')
       .whereNotNull('parent_station');
-      // .unique();
+      // .unique(); // Why does this throw an error?
 
     const referencedStops = records.map(record => record.parent_station);
     console.log("referencedStops =", referencedStops);
-    // return referencedStops;
+    
     return db('stops')
       .whereIn('stop_id', referencedStops)
       .select('stop_id', 'stop_name', 'stop_lat', 'stop_lon');

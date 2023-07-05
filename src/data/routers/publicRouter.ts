@@ -61,16 +61,17 @@ router.get('/routes/:id', (req: Request, res: Response): void => {
 
 // --------- Stops ----------
 
-// GET all stops on a ROUTE
+// GET all stops by category (route or station)
 // Ex: "stops?route=01"
 // Expect: [{ stop_id, stop_name }] of ALL stops on the route
 // Note: Not every trip will necessarily serve each stop.
 router.get('/stops', (req: Request, res: Response): void => {
-  const route = req.query.route;
-  if (!route) {
-    res.status(400).json({message: 'Please provide a route number'});
+  const { route, station } = req.query;
+  if (!route && !station) {
+    res.status(400).json({message: 'Please provide a route number or station ID'});
     return;
   }
+  if (route) {
   db.getStopsByRoute(route)
     .then((stops: any) => { 
       res.json(stops || []);
@@ -79,6 +80,19 @@ router.get('/stops', (req: Request, res: Response): void => {
       console.error(err);
       res.status(500).json({message: 'Something went wrong', error: err.message});
     });
+    return;
+  }
+  if (station) {
+    db.getStopsByStationId(station)
+    .then((stops: any) => { 
+      res.json(stops || []);
+    })
+    .catch((err: Error) => {
+      console.error(err);
+      res.status(500).json({message: 'Something went wrong', error: err.message});
+    });
+    return;
+  }
 });
 
 // GET details for a specific stop
