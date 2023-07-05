@@ -24,3 +24,13 @@ body {
   border-radius: 5px;
   font-family: monospace;
 }
+
+.b {
+  color: lightskyblue;
+}
+.g {
+  color: #bada55;
+}
+.r {
+  color: #da6255;
+}

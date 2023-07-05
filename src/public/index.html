@@ -40,7 +40,7 @@
       /api/info
     </div>
 
-    All the transit routes served by this API:
+    List of transit routes served by this API:
     <div class="example">
       /api/routes
     </div>
@@ -50,9 +50,15 @@
       /api/routes/91
     </div>
     
-    All the stops on a route:
+    List of transit stations:
     <div class="example">
-      /api/stops?route=01
+      /api/stations
+    </div>
+
+    List of stops by category:
+    <div class="example">
+      /api/stops<span class="b">?route=01</span><br>
+      /api/stops<span class="b">?station=99901</span>
     </div>
 
     Details about a specific stop:
@@ -60,14 +66,14 @@
       /api/stops/02507
     </div>
 
-    All of today's departures for a stop:
+    List of all departures for a stop today:
     <div class="example">
-      /api/departures?stop=02507&date=today
+      /api/departures<span class="b">?stop=02507</span><span class="g">&date=today</span>
     </div>
     
     Departures for a stop, date, and route:
     <div class="example">
-      /api/departures?stop=02507&date=20230624&route=01
+      /api/departures<span class="b">?stop=02507</span><span class="g">&date=20230624</span><span class="r">&route=01</span>
     </div>
   </div>
 </body>

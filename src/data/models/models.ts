@@ -123,12 +123,11 @@ async function getAllStations(/* db: Knex */):
   try {
     const records: DatabaseRecord[] = await db.select('parent_station')
       .from('stops')
-      .whereNotNull('parent_station');
-      // .unique(); // Why does this throw an error?
+      .whereNotNull('parent_station')
+      .distinct();
 
     const referencedStops = records.map(record => record.parent_station);
-    console.log("referencedStops =", referencedStops);
-    
+        
     return db('stops')
       .whereIn('stop_id', referencedStops)
       .select('stop_id', 'stop_name', 'stop_lat', 'stop_lon');

@@ -66,7 +66,7 @@ Returns an array of all routes in the system (same fields as above)
 
 ### Stops
 
-Information about a specific stop, by ID.
+Information about a specific stop by ID.
 
 #### `GET /api/stops/:id`
 
@@ -86,9 +86,14 @@ If a stop is a bay of a larger station, its parent station will be set to the ID
 
 Parent stations are also searchable using the same endpoint.
 
-#### `GET /api/stops?route=[id]`
+#### `GET /api/stops?`
 
-Returns an array of all stop IDs and names on a route, by route ID. Useful for setting up a new departure board.
+
+- By route: `/api/stops?route=01`
+- By station: `/api/stops?station=99901`
+
+
+Returns an array of all stop IDs and stop names by route or by station ID. Useful for setting up a new departure board.
 
 ```js
 [{ stop_id, stop_name }, ]
@@ -98,9 +103,9 @@ Returns an array of all stop IDs and names on a route, by route ID. Useful for s
 
 #### `GET /api/departures?`
 
-- REQUIRED: `?stop=[id]`
-- REQUIRED: `&date=[YYYYMMDD]` or `&date=today`
-- OPTIONAL: `&route=[id]` - limits results to a single route
+- Required: `?stop=[id]`
+- Required: `&date=[YYYYMMDD]` or `&date=today`
+- Optional: `&route=[id]` - limits results to a single route
 
 Returns a list of all departure times from a given stop on a given date, along with the associated headsigns.
 
