@@ -98,6 +98,25 @@ router.get('/stops/:id', (req: Request, res: Response): void => {
     });
 });
 
+// --------- Stations ----------
+// GET all stations
+// Expect: [{stop_id, stop_name, stop_lat, stop_lon}]
+router.get('/stations', (req: Request, res: Response): void => {
+  db.getAllStations()
+    .then((stations: any) => {
+
+      res.json(stations);
+    })
+    .catch((err: Error) => {
+      console.error(err);
+      res.status(500).json({message: 'Something went wrong', error: err.message});
+    });
+});
+
+// GET details for a specific station
+// Just use the stop endpoint
+
+
 // --------- Departures ----------
 
 // GET departure times for a stop [and route] on a specific date

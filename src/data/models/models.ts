@@ -11,6 +11,8 @@ export default {
   getStopById,
   getStopsByRoute,
   getDeparturesByStopAndDate,
+  getAllStations,
+  getStopsByStationId
 };
 
 // ----- Helper functions -----
@@ -45,15 +47,6 @@ async function getAgencyInfo() {
   return { ...agencyInfo, start_date, end_date };
 }
 
-
-  // return "TESTING";
-  // let startDate = db('calendar_dates').min('date');
-  // console.log(startDate);
-  // let endDate = db('calendar_dates').max('date');
-  // console.log(endDate);
-  // console.log({ startDate, endDate })
-  // return { startDate, endDate };
-// }
 // ---------- Routes ----------
 
 function getAllRoutes() {
@@ -103,5 +96,61 @@ async function getDeparturesByStopAndDate(stopId: any, date: any, routeId?: any)
 
     return query;
 }
-
 // where and andWhere seem to be the same
+
+// async function getStopsByRoute(routeId: any) {
+//   const tripIdQuery = db.select('trip_id')
+//     .distinct()
+//     .from('trips')
+//     .where('route_id', routeId);
+  
+//   return db('stop_times')
+//     .whereIn('trip_id', tripIdQuery)
+//     .join('stops', 'stop_times.stop_id', '=', 'stops.stop_id')
+//     .select('stops.stop_id', 'stops.stop_name')
+//     .distinct();
+// }
+
+// async function getAllStations() {
+//   const subquery = db('stops')
+//     .whereNotNull('parent_station')
+//     .select('parent_station')
+//     .distinct();
+
+//   const myArr: string[] = ['hello'];
+//   await myArr.push(subquery);
+//   console.log("myArr =", myArr);
+// }
+
+async function getAllStations(/* db: Knex */): 
+  Promise<{ stop_id: string, stop_name: string, stop_lat: string, stop_long: string }[]> {
+  interface DatabaseRecord {
+    stop_id: string;
+    stop_name: string;
+    parent_station: string;
+  }
+
+  try {
+    const records: DatabaseRecord[] = await db.select('parent_station')
+      .from('stops')
+      .whereNotNull('parent_station');
+      // .unique();
+
+    const referencedStops = records.map(record => record.parent_station);
+    console.log("referencedStops =", referencedStops);
+    // return referencedStops;
+    return db('stops')
+      .whereIn('stop_id', referencedStops)
+      .select('stop_id', 'stop_name', 'stop_lat', 'stop_lon');
+
+  } catch (error) {
+    console.error('Error retrieving referenced stops:', error);
+    return [];
+  }
+}
+
+async function getStopsByStationId(stationId: any) {
+  return db('stops')
+    .where('parent_station', stationId)
+    .select('stop_id', 'stop_name');
+}
