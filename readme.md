@@ -52,7 +52,7 @@ This is built for my [specific needs](./docs/motivation.md), using data from Lan
 
 ## Status
 
-- [x] `gtfs2db` utility produces SQLite database from GTFS files.
+- [x] `gtfs2db` Python utility produces SQLite database from GTFS files.
 - [x] Postgres database migration successful using `pgloader`
 - [x] Python script can display departure information as text from SQLite.
 - [x] Created REST API using Express and Node.
@@ -60,10 +60,10 @@ This is built for my [specific needs](./docs/motivation.md), using data from Lan
 
 TODO:
 
-- [ ] Cleanup deelopment files
+- [ ] Cleanup development files
   - [ ] `./docs/gtfs_data`
   - [ ] `./utils/*.ipynb`
-- [ ] Improve html landing pages at `/` and `/api` 
+- [x] Improve html landing pages at `/` and `/api`
 
 ## Data Sources
 
@@ -79,7 +79,7 @@ There is no direct public API to poll for this data, but data is published in a 
 - [CSV file of links](./resources/sources.csv)
 - LTD Service Alerts [XML RSS Feed](https://www.ltd.org/service_alerts_rss.php)
 - [Toptal](https://www.toptal.com/developers/feed2json/)  converts RSS to JSON using the [npm feedparser library](https://www.npmjs.com/package/feedparser) (formerly feed2json.org)
-- Ex: https://www.toptal.com/developers/feed2json/convert?url=https%3A%2F%2Fwww.ltd.org%2Fservice_alerts_rss.php
+- Ex: `https://www.toptal.com/developers/feed2json/convert?url=https%3A%2F%2Fwww.ltd.org%2Fservice_alerts_rss.php`
 
 ## Quick Start
 

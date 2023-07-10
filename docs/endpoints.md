@@ -88,10 +88,8 @@ Parent stations are also searchable using the same endpoint.
 
 #### `GET /api/stops?`
 
-
 - By route: `/api/stops?route=01`
 - By station: `/api/stops?station=99901`
-
 
 Returns an array of all stop IDs and stop names by route or by station ID. Useful for setting up a new departure board.
 
@@ -116,3 +114,17 @@ Returns a list of all departure times from a given stop on a given date, along w
   trip_headsign,   // ex: "103 EmX WEST 11TH <> COMMERCE STATION"
 }]
 ```
+
+### Stations
+
+A station is just "stop" that contains other stops (bays, tracks, gates, etc).
+
+#### `GET /api/stations`
+
+Returns an array of all stations in the system.
+
+```js
+[{ stop_id, stop_name, stop_lat, stop_lon }, ]
+```
+
+To find a list of stops at a station, use `/api/stops?station=[id]`.
