@@ -9,7 +9,7 @@ const server: express.Application = express();
 // Middleware
 server.use(express.json());
 server.use(express.static(path.join(__dirname, 'public')));
-server.use(favicon(path.join(__dirname, 'public/public', 'favicon.ico')));
+server.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // Routes
 
