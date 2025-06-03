@@ -24,3 +24,5 @@ npm-debug.log
 gtfs/*.zip
 gtfs/*.txt
 
+# Scripts that include sensitive information
+utils/uploaddb.sh

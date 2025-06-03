@@ -75,7 +75,8 @@ There is no direct public API to poll for this data, but data is published in a 
 - Transitfeeds [LTD configuration](https://transitfeeds.com/p/lane-transit-district/314/latest)
 - Transitfeeds is being replaced by [Mobility Database](https://database.mobilitydata.org/)
 - [Oregon-specific site](https://oregon-gtfs.com/)
-- [LTD's feed](http://feed.ltd.org/gtfs-realtime/gtfs) (zip file)
+- [~~LTD's feed~~](http://feed.ltd.org/gtfs-realtime/gtfs) (defunct link)
+- [LTD's feed](https://www.ltd.org/files/library/ltdgtfs.zip) (zip file)
 - [CSV file of links](./resources/sources.csv)
 - LTD Service Alerts [XML RSS Feed](https://www.ltd.org/service_alerts_rss.php)
 - [Toptal](https://www.toptal.com/developers/feed2json/)  converts RSS to JSON using the [npm feedparser library](https://www.npmjs.com/package/feedparser) (formerly feed2json.org)
@@ -103,6 +104,8 @@ mv my_data.db my_data.old.db
 # Create the new DB
 ./gtfs2db.py
 ```
+
+You will need the `pandas` and `sqlite` pip packages to run it.
 
 ### Migrate the data (optional)
 
