@@ -28,6 +28,7 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^4.17.17",
     "@types/node": "^20.2.5",
     "nodemon": "^2.0.22",
